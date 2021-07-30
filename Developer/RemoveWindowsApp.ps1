@@ -91,9 +91,13 @@ function Get-LogDir
 function Get-AppList
 {
   begin
-  {
+  {# Download AppXMl
+    $url = "https://raw.githubusercontent.com/csaunders1401/WVD/main/Developer/RemoveApps.xml"
+    $output = "C:\temp\RemoveApps.xml"
+    Invoke-WebRequest -Uri $url -OutFile $output
+
     # Look for a config file.
-    $configFile = "$PSScriptRoot\RemoveApps.xml"
+    $configFile = "C:\temp\RemoveApps.xml"
     if (Test-Path -Path $configFile)
     {
       # Read the list
