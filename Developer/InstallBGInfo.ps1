@@ -3,6 +3,7 @@
  $appName = 'BGInfo'
  $drive = 'C:\'
  $ProgramFiles = 'C:\Program Files\'
+ $RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
  New-Item -Path $drive -Name $appName  -ItemType Directory -ErrorAction SilentlyContinue
  New-Item -Path $ProgramFiles -Name $appName  -ItemType Directory -ErrorAction SilentlyContinue
  $LocalPath = $drive + '\' + $appName 
@@ -19,6 +20,7 @@
  Expand-Archive -LiteralPath 'C:\BGInfo\BGInfo.zip' -DestinationPath 'C:\Program Files\BGInfo'
 # Start-Process -FilePath $outputPath -Args "/S" -Wait
 write-host 'AIB Customization: Finished Install BGInfo'
+New-ItemProperty -Path $RegistryPath -name 'bginfo' -Value '"C:\Program Files\BGInfo\Bginfo64.exe" "C:\Program Files\BGInfo\Dev.bgi" /timer:0 /nolicprompt'
 #'@echo off
 #cd
 #CALL "C:\Program Files\BGInfo\bginfo.exe" "C:\Program Files\BGInfo\DEV.bgi" /timer:0 /nolicprompt' |Out-File 'C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\Run.bat'
