@@ -2,7 +2,7 @@
  # install Notepad++
  write-host 'AIB Customization: Install NotePadd++'
  $appName = 'Notepad++'
- $drive = 'C:\Build\'
+ $drive = 'C:\'
  New-Item -Path $drive -Name $appName  -ItemType Directory -ErrorAction SilentlyContinue
  $LocalPath = $drive + '\' + $appName 
  set-Location $LocalPath
