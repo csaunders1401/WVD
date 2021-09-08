@@ -105,9 +105,9 @@
  write-host 'AIB Customization: Finished Install Microsoft CLI' 
 
  #Install GIT Desktop
- write-host 'AIB Customization: Starting Install GIT for Windows'
- Start-Process -FilePath $GIToutputPath -Args "-silent" -Wait
- write-host 'AIB Customization: Finished Install GIT for Windows' 
+ #write-host 'AIB Customization: Starting Install GIT for Windows'
+ #Start-Process -FilePath $GIToutputPath -Args "-silent" -Wait
+ #write-host 'AIB Customization: Finished Install GIT for Windows' 
 
  # Install Powershell 7
  write-host 'AIB Customization: Starting Install Powershell 7 x64'
