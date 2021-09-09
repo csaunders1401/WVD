@@ -122,7 +122,11 @@
  Expand-Archive -LiteralPath 'C:\build\BGInfo\BGInfo.zip' -DestinationPath 'C:\Program Files\BGInfo'
  New-ItemProperty -Path $RegistryPath -name 'bginfo' -Value '"C:\Program Files\BGInfo\Bginfo64.exe" "C:\Program Files\BGInfo\Dev.bgi" /timer:0 /nolicprompt'
  write-host 'AIB Customization: Finished Install BGInfo'
- 
+
+ # Install Bicep
+ write-host 'AIB Customization: Starting Install BICEP'
+ az bicep install
+ write-host 'AIB Customization: Finished Install Bicep'
 
  #Run Optimization Script
     write-host 'AIB Customization: Starting OS Optimizations script'
