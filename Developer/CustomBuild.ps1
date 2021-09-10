@@ -120,8 +120,8 @@
 
  #Install GIT Desktop
  write-host 'AIB Customization: Starting Install GIT for Windows'
- #Start-Process -FilePath $GIToutputPath -Args "-silent" -Wait
- Start-Process -FilePath "C:\Windows\System32\cmd.exe" -args "/c C:\build\GIT\GitHubDesktopSetup-x64.exe -s"
+ #Start-Process -FilePath $GIToutputPath -Args "-s" -Wait
+ #Start-Process -FilePath "C:\Windows\System32\cmd.exe" -args "/c C:\build\GIT\GitHubDesktopSetup-x64.exe -s"
  write-host 'AIB Customization: Finished Install GIT for Windows' 
 
  # Install Powershell 7
