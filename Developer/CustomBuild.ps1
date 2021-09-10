@@ -125,7 +125,6 @@
 
  # Install Bicep
  write-host 'AIB Customization: Starting Install BICEP'
- Install-Module -Name AZ -Scope AllUsers -Repository PSGallery -force
  az bicep install
  write-host 'AIB Customization: Finished Install Bicep'
 
