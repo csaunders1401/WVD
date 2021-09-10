@@ -107,7 +107,7 @@
  #Install GIT Desktop
  write-host 'AIB Customization: Starting Install GIT for Windows'
  #Start-Process -FilePath $GIToutputPath -Args "-silent" -Wait
- Start-Process -FilePath "C:\build\GIT\GitHubDesktopSetup-x64.exe" -Args "-s"
+ Start-Process -FilePath "C:\build\GIT\GitHubDesktopSetup-x64.exe"
  write-host 'AIB Customization: Finished Install GIT for Windows' 
 
  # Install Powershell 7
@@ -125,6 +125,7 @@
 
  # Install Bicep
  write-host 'AIB Customization: Starting Install BICEP'
+ Install-Module -Name AZ -Scope AllUsers -Repository PSGallery -force
  az bicep install
  write-host 'AIB Customization: Finished Install Bicep'
 
