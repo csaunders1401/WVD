@@ -144,7 +144,7 @@
 
  #Install Startmenu
  write-host 'AIB Customization: Starting Install StartMenu'
- Install-ProvisioningPackage -PackagePath $StartoutputPath
+ Install-ProvisioningPackage -PackagePath $StartoutputPath -quietinstall
  write-host 'AIB Customization: Finished Install StartMenu'
 
  #Run Optimization Script
