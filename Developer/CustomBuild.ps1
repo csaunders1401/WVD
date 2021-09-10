@@ -9,6 +9,7 @@
  $GITName = 'GIT'
  $PS7Name = 'Powershell7'
  $BGInfoName = 'BGInfo'
+ $StartName = "StartMenu"
  
  
  #download links
@@ -21,6 +22,8 @@
  $Powershellx86URL = 'https://github.com/PowerShell/PowerShell/releases/download/v7.1.4/PowerShell-7.1.4-win-x86.msi'
  $BGInfoURL = 'https://download.sysinternals.com/files/BGInfo.zip'
  $BGInfoConfig = 'https://github.com/csaunders1401/WVD/blob/main/Developer/DEV.bgi?raw=true'
+ $StartPPKGURL = 'https://github.com/csaunders1401/WVD/blob/main/Developer/StartMenu.ppkg?raw=true'
+ $StartXMLURL = 'https://raw.githubusercontent.com/csaunders1401/WVD/main/Developer/StartMenu.xml'
 
  # Exe Names
  $osOptURLexe = 'Windows_10_VDI_Optimize-master.zip'
@@ -31,6 +34,8 @@
  $PowershellURLexe = 'PowerShell-7.1.4-win-x64.msi'
  $Powershellx86URLexe = 'PowerShell-7.1.4-win-x86.msi'
  $BGInfoexe = 'BGInfo.zip'
+ $StartMenuexe = 'StartMenu.ppkg'
+ $StartMenuConfig = 'StartMenu.xml'
  
   
  # Create Folder Structure
@@ -63,6 +68,10 @@
  $BGInfoPath = $drive + '\' + $BGInfoName 
  set-Location $BGInfoPath
 
+ New-Item -Path $drive -Name $StartName  -ItemType Directory -ErrorAction SilentlyContinue
+ $StartPath = $drive + '\' + $StartName  
+ set-Location $StartPath
+
  # Download Files
  $NPoutputPath = $NotepadPath + '\' + $NotepadPlusURLexe
  Invoke-WebRequest -Uri $NotepadPlusURL -OutFile $NPoutputPath
@@ -88,6 +97,11 @@
  $BGInfooutputPath = $BGInfoPath + '\' + $BGInfoexe
  Invoke-WebRequest -Uri $BGInfoURL -OutFile $BGInfooutputPath
  Invoke-WebRequest -Uri $BGInfoConfig -OutFile 'C:\Program Files\BGInfo\Dev.bgi'
+
+ $StartoutputPath = $StartPath + '\' + $StartMenuexe
+ $StartConfigoutputPath = $StartPath + '\' + $StartMenuConfig
+ Invoke-WebRequest -Uri $StartPPKGURL -OutFile $StartoutputPath
+ Invoke-WebRequest -Uri $StartXMLURL -OutFile $StartConfigoutputPath
 
  # Install Notepad++ 
  write-host 'AIB Customization: Starting Install Notepad++'
@@ -127,6 +141,11 @@
  write-host 'AIB Customization: Starting Install BICEP'
  az bicep install
  write-host 'AIB Customization: Finished Install Bicep'
+
+ #Install Startmenu
+ write-host 'AIB Customization: Starting Install StartMenu'
+ Install-ProvisioningPackage -PackagePath $StartoutputPath
+ write-host 'AIB Customization: Finished Install StartMenu'
 
  #Run Optimization Script
     write-host 'AIB Customization: Starting OS Optimizations script'
