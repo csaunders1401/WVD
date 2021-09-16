@@ -9,7 +9,8 @@
  $GITName = 'GIT'
  $PS7Name = 'Powershell7'
  $BGInfoName = 'BGInfo'
- $StartName = "StartMenu"
+ $StartName = 'StartMenu'
+ $GIT4WinName = 'GITForWin'
  
  
  #download links
@@ -24,6 +25,8 @@
  $BGInfoConfig = 'https://github.com/csaunders1401/WVD/blob/main/Developer/DEV.bgi?raw=true'
  $StartPPKGURL = 'https://github.com/csaunders1401/WVD/blob/main/Developer/StartMenu.ppkg?raw=true'
  $StartXMLURL = 'https://raw.githubusercontent.com/csaunders1401/WVD/main/Developer/StartMenu.xml'
+ $GIT4WinURL = 'https://github.com/git-for-windows/git/releases/download/v2.33.0.windows.2/Git-2.33.0.2-64-bit.exe'
+ $GIT4WinInstallerURL = 'https://raw.githubusercontent.com/csaunders1401/WVD/main/Developer/GITforWinInstaller.inf'
 
  # Exe Names
  $osOptURLexe = 'Windows_10_VDI_Optimize-master.zip'
@@ -36,6 +39,8 @@
  $BGInfoexe = 'BGInfo.zip'
  $StartMenuexe = 'StartMenu.ppkg'
  $StartMenuConfig = 'StartMenu.xml'
+ $GIT4Winexe = 'Git.exe'
+ $GIT4WinInstallerInf = 'GITforWinInstaller.inf'
  
   
  # Create Folder Structure
@@ -72,6 +77,10 @@
  $StartPath = $drive + '\' + $StartName  
  set-Location $StartPath
 
+ New-Item -Path $drive -Name $GIT4WinName  -ItemType Directory -ErrorAction SilentlyContinue
+ $GIT4WinPath = $drive + '\' + $GIT4WinName
+ set-Location $GIT4WinPath
+
  # Download Files
  $NPoutputPath = $NotepadPath + '\' + $NotepadPlusURLexe
  Invoke-WebRequest -Uri $NotepadPlusURL -OutFile $NPoutputPath
@@ -102,6 +111,11 @@
  $StartConfigoutputPath = $StartPath + '\' + $StartMenuConfig
  Invoke-WebRequest -Uri $StartPPKGURL -OutFile $StartoutputPath
  Invoke-WebRequest -Uri $StartXMLURL -OutFile $StartConfigoutputPath
+
+ $GIT4WinoutputPath = $GIT4WinPath + '\' + $GIT4Winexe
+ $GIT4winInstalloutputPath =$GIT4WinPath + '\' + $GIT4WinInstallerInf
+ Invoke-WebRequest -Uri $GIT4WinURL -OutFile $GIT4WinoutputPath
+ Invoke-WebRequest -Uri $GIT4WinInstallerURL -OutFile $GIT4winInstalloutputPath
 
  # Install Notepad++ 
  write-host 'AIB Customization: Starting Install Notepad++'
@@ -148,6 +162,12 @@
  write-host 'AIB Customization: Starting Install StartMenu'
  Install-ProvisioningPackage -PackagePath $StartoutputPath -quietinstall
  write-host 'AIB Customization: Finished Install StartMenu'
+
+ # Install GIT for Windows
+ write-host 'AIB Customization: Starting Install GIT for Windows'
+ $Args = $GIT4winInstalloutputPath + ' /VERYSILENT'
+ Start-Process -FilePath $GIT4WinoutputPath -Args $Args -Wait
+ write-host 'AIB Customization: Finished Install GIT for Windows'
 
  #Run Optimization Script
     write-host 'AIB Customization: Starting OS Optimizations script'
